@@ -1,0 +1,28 @@
+{% extends 'base_edit.html' %}
+{% block title%}
+Edit order
+{%endblock%}
+{%block padding%}padding: 0 268px;{% endblock%}
+
+
+    {% block container3_text%}
+     <div class="text1">
+       <form action = "/orders_list_edit" method="post">
+       <p><label for="select_order">Enter the id number of the selected order</label>
+   <textarea id="select_order" name="select_order" rows="2" cols="15"></textarea></p>
+   <p><label for="cname">Passport number:</label>
+   <textarea id="cname" name="cname" rows="2" cols="20"></textarea></p>
+  <p><label for="cdes">Car number:</label>
+   <textarea id="cdes" name="cdes" rows="2" cols="15"> </textarea></p>
+    <p><label for="rtime">Rental time:</label>
+   <textarea id="rtime" name="rtime" rows="2" cols="7">  </textarea></p>
+    <p><label for="calendar">Add date:</label>
+    <input type="date" name="calendar" id="calendar"></p>
+   <p>
+	    <input class="submit_save" type="submit" value = "Save">
+	</p>
+  </form></div>
+
+
+    {% endblock%}
+{% block action %}action = "/orders_list"{% endblock %}

@@ -1,0 +1,164 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Rental cars</title>
+ </head>
+ <body bgcolor="#54595C">
+<style>
+.container {
+    position: relative;
+    top: 100px;
+    text-align: center;
+    color: white;
+
+}
+
+
+</style>
+<div class="container">
+  <div class="lin"><h1 class="orders_list"><span>{% block title_list%}{% endblock %}</span></h1></div>
+</div>
+<style>
+.orders_list {
+	font-size: 30px;
+	line-height: 50px;
+	color: white;
+
+}
+.orders_list span {
+	padding: 0 {% block lin_style%}{%endblock%}
+	background: #999999;
+}
+</style>
+<style>
+.container1{
+    position: relative;
+    top: 71px;
+    text-align: center;
+    color: white;
+    left: 231.5px;
+
+}
+
+
+</style>
+
+<div class="container1">
+<nav class="one">
+  <ul>
+    <li><a  href="/orders_list">Orders</a></li>
+    <li><a method="get" href="/clients_list">Clients</a></li>
+    <li><a method="get" href="/cars_list">Cars</a></li>
+  </ul>
+</nav>
+
+
+</div>
+
+<style>
+body {margin: 0;}
+
+ul {
+  list-style: none;
+  margin: 0 auto;
+
+}
+a {
+  text-decoration: none;
+  transition: .5s linear;
+
+}
+i {
+  margin-right: 10px;
+}
+nav {
+  text-align: left;
+  display: block;
+  width: 817px;
+  margin: 0 auto 30x;
+
+}
+.one ul {
+
+  padding: 1em 0;
+  background: white;
+
+}
+.one a {
+  padding: 1em;
+  background: #666666;
+  border-right: 1px solid #666666;
+  color: black;
+}
+.one a:hover {background: #CCCCCC;}
+.one li {
+  display: inline;
+}
+
+</style>
+<style>
+.container2{
+    position: relative;
+    top: 62px;
+    text-align: center;
+    color: white;
+
+
+}
+</style>
+<div class="container2">
+<div class="line1"><hr align="center" width="63.7%" size="2" color="black" /></div>
+</div>
+ <style>
+.container3{
+    position: relative;
+    top: 54px;
+    text-align: center;
+    background-color: white;
+    width: 797.5px;
+    height: 50px;
+    margin: 0;
+    padding: 10px;
+    left:231
+}
+{% block style_filtring%}{% endblock %}
+.refresh{
+   position: absolute;
+  top: 31.5px;
+  right: 134px;
+  text-align: center;
+}
+
+.buttonload {
+    position: absolute;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  padding: 4px 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 50%;
+  top: 18px;
+  left: 610px;
+
+}
+a-refresh{
+   display: block;
+  margin-left: auto;
+   margin-right: auto;
+
+}
+
+</style>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="container3">
+    {% block calendar %}
+    {% endblock %}
+
+
+</div>
+{% block else %}{% endblock %}
+</body>
+</html>
