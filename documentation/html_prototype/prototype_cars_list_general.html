@@ -261,21 +261,35 @@ table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
+dialog {
+
+    background: white;
+    width: 250px;
+
+    border-radius: 5px;
+
+   }
+.delete_dialog{
+    position: absolute;
+    top: -90px;
+    right: 570px;
+}
 </style>
 <div class="container5">
 <div class = "table1"><table  width="87%" cellpadding="3">
   <tr>
     <th class="col1">Car description</th>
+      <th class="col1">Car number</th>
     <th class="col1">Rental cost</th>
      <th class="col1">Number of orders</th>
      
   </tr>
   <tr>
-    <td>bmw</td>
+    <td>bmw</td><td>234</td>
     <td>85.00</td><td>1</td>
   </tr>
   <tr>
-    <td>renault</td>
+    <td>renault</td><td>345</td>
     <td>75.00</td><td>2</td>
   </tr>
   
@@ -283,17 +297,33 @@ table, th, td {
 </div>
 <div class = "table2"><table  width="10%" cellpadding="4">
   <tr>
-    <td>
-  <i class="fa fa-pencil fa-fw"></i></td>
-    <td>
-  <i class="fa fa-trash fa-fw"></i></td>
-  </tr>
-  <tr>
-    <td>
-  <i class="fa fa-pencil fa-fw"></i></td>
-    <td>
-  <i class="fa fa-trash fa-fw"></i></td>
-  </tr>
+    <td>  <a href=""><i class="fa fa-pencil fa-fw"></i></a></td>
+    <td><button id="openDialog"><i class="fa fa-trash fa-fw"></i></button></td>
+   </tr>
+<div class = "delete_dialog"><dialog>
+        <p>Delete car?</p>
+        <form>
+        <p><label for="cdes">Car number:</label>
+        <textarea id="cdes" name="cdes" rows="1" cols="5"> </textarea></p>
+        <p><button id="closeDialog_yes">Yes</button></p></form>
+        <p><form><button id="closeDialog_cancel">Cancel</button></form></p>
+    </dialog></div>
+    <script>
+
+     var dialog = document.querySelector('dialog');
+     document.querySelector('#openDialog').onclick = function() {
+      dialog.show();
+     }
+
+     document.querySelector('#closeDialog_yes').onclick = function() {
+      dialog.close();
+     }
+     document.querySelector('#closeDialog_cancel').onclick = function() {
+      dialog.close();
+     }
+
+    </script>
+
   
 </table>
 </div>

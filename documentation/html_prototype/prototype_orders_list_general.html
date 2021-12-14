@@ -257,10 +257,24 @@ table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
+dialog {
+    position: absolute;
+    background: white;
+    width: 250px;
+    border-radius: 5px;
+    top: 10px;
+    right: 1000px;
+}
+.delete_dialog{
+    position: absolute;
+    top: -80px;
+    right: 570px;
+}
 </style>
 <div class="container5">
 <div class = "table1"><table  width="87%" cellpadding="3">
   <tr>
+    <th class="col1">ID</th>
     <th class="col1">Car number</th>
     <th class="col1">Client passport number</th>
      <th class="col1">Add date</th>
@@ -269,10 +283,12 @@ table, th, td {
      <th class="col1">Total cost</th>
   </tr>
   <tr>
+      <td>1</td>
     <td>412</td>
     <td>ab241</td><td>02.03.2018</td><td>2</td><td>85.00</td><td>170.00</td>
   </tr>
   <tr>
+      <td>2</td>
     <td>542</td>
     <td>ac4123</td><td>12.03.2018</td><td>3</td><td>77.00</td><td>231.00</td>
   </tr>
@@ -280,20 +296,37 @@ table, th, td {
 </table>
 </div>
 <div class = "table2"><table  width="10%" cellpadding="4">
-  <tr>
-    <td>
-  <i class="fa fa-pencil fa-fw"></i></td>
-    <td>
-  <i class="fa fa-trash fa-fw"></i></td>
-  </tr>
-  <tr>
-    <td>
-  <i class="fa fa-pencil fa-fw"></i></td>
-    <td>
-  <i class="fa fa-trash fa-fw"></i></td>
-  </tr>
+
+    <tr>
+    <td> <a href=""><i class="fa fa-pencil fa-fw"></i></a></td>
+    <td><button id="openDialog"><i class="fa fa-trash fa-fw"></i></button></td>
+ </tr>
+    <div class = "delete_dialog"><dialog class = 'delete_dialog'>
+        <p>Delete order?</p>
+        <form>
+        <p><label for="cdes">Number of order:</label>
+        <textarea id="cdes" name="cdes" rows="1" cols="3"> </textarea></p>
+            <p><button id="closeDialog_yes">Yes</button></form></p>
+        <p><form><button id="closeDialog_cancel">Cancel</button></form></p>
+    </dialog></div>
+    <script>
+
+     var dialog = document.querySelector('dialog');
+     document.querySelector('#openDialog').onclick = function() {
+      dialog.show(); // Показываем диалоговое окно
+     }
+     document.querySelector('#closeDialog_yes').onclick = function() {
+      dialog.close(); // Прячем диалоговое окно
+     }
+     document.querySelector('#closeDialog_cancel').onclick = function() {
+      dialog.close(); // Прячем диалоговое окно
+     }
+
+    </script>
+
+
   
 </table>
 </div>
-</div>
+</div></body>
 </html>

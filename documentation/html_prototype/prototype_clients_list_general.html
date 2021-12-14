@@ -258,49 +258,73 @@ table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
+.delete_dialog {
+    position: absolute;
+    background: white;
+    width: 250px;
+    border-radius: 5px;
+
+   }
+.delete_dialog{
+    position: absolute;
+    top: -60px;
+    right: 270px;
+}
 </style>
 <div class="container5">
 <div class = "table1"><table  width="87%" cellpadding="3">
   <tr>
-    <th class="col1">First name</th>
+     <th class="col1">First name</th>
     <th class="col1">Last name</th>
-     <th class="col1">Registration date</th>
+      <th class="col1">Passport number</th>
+     <th class="col1">Add date</th>
      <th class="col1">Number of orders</th>
   </tr>
   <tr>
     <td>Борис </td>
-    <td>Іванов</td><td>01.03.2018</td><td>1</td>
+    <td>Іванов</td><td>af4566</td><td>01.03.2018</td><td>1</td>
   </tr>
   <tr>
     <td>Антон</td>
-    <td>Петров</td><td>12.03.2018</td><td>2</td>
+    <td>Петров</td><td>af3422</td><td>12.03.2018</td><td>2</td>
   </tr>
  <tr>
     <td>Богдан </td>
-    <td>Попов</td><td>21.07.2018</td><td>1</td>
+    <td>Попов</td><td>af2344</td><td>21.07.2018</td><td>1</td>
   </tr>
   
 </table>
 </div>
 <div class = "table2"><table  width="10%" cellpadding="4">
   <tr>
-    <td>
-  <i class="fa fa-pencil fa-fw"></i></td>
-    <td>
-  <i class="fa fa-trash fa-fw"></i></td>
-  </tr>
-  <tr>
-    <td>
-  <i class="fa fa-pencil fa-fw"></i></td>
-    <td>
-  <i class="fa fa-trash fa-fw"></i></td>
-  </tr>
-<tr>
-    <td>
-  <i class="fa fa-pencil fa-fw"></i></td>
-    <td>
-  <i class="fa fa-trash fa-fw"></i></td>
-  </tr>
+      <div class = "delete_dialog"><dialog class = 'delete_dialog'>
+        <p>Delete client?</p>
+          <form>
+        <p><label for="cdes">Passport number:</label>
+        <textarea id="cdes" name="cdes" rows="1" cols="5"> </textarea></p>
+        <p><button id="closeDialog_yes">Yes</button></form></p>
+        <p><form><button id="closeDialog_cancel">Cancel</button></form></p>
+    </dialog></div>
+    <td> <a  href=""><i class="fa fa-pencil fa-fw"></i></a></td>
+    <td><button id="openDialog"><i class="fa fa-trash fa-fw"></i></button></td>
+   </tr>
+
+    <script>
+
+     var dialog = document.querySelector('dialog');
+     document.querySelector('#openDialog').onclick = function() {
+      dialog.show(); // Показываем диалоговое окно
+     }
+     document.querySelector('#closeDialog_yes').onclick = function() {
+      dialog.close(); // Прячем диалоговое окно
+     }
+     document.querySelector('#closeDialog_cancel').onclick = function() {
+      dialog.close(); // Прячем диалоговое окно
+     }
+
+    </script>
+
+
   
 </table>
 </div>
