@@ -1,0 +1,159 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Rental cars</title>
+ </head>
+ <body bgcolor="#54595C">
+<style>
+.container {
+    position: relative;
+    top: 101px;
+    text-align: center;
+    margin-left: 18.11%;
+    margin-right: 18.11%;
+    background-color: #999999;
+}
+
+
+</style>
+<div class="container">
+  <div class="lin"><p><b>{% block title_list %}{% endblock %}</b></p></div>
+</div>
+<style>
+.lin {
+	font-size: 30px;
+	line-height: 50px;
+	color: white;
+
+}
+</style>
+<style>
+.container1{
+    position: relative;
+    top: 71px;
+    color: white;
+    margin-left: 18.11%;
+    margin-right: 18.11%;
+
+}
+
+
+</style>
+
+<div class="container1">
+<nav class="one">
+  <ul>
+    <li><a  href="/orders_list">Orders</a></li>
+    <li><a method="get" href="/clients_list">Clients</a></li>
+    <li><a method="get" href="/cars_list">Cars</a></li>
+  </ul>
+</nav>
+
+
+</div>
+
+<style>
+body {margin: 0;}
+
+ul {
+  list-style: none;
+  margin: 0 auto;
+
+}
+a {
+  text-decoration: none;
+  transition: .5s linear;
+
+}
+i {
+  margin-right: 10px;
+}
+nav {
+  text-align: left;
+  display: block;
+
+
+}
+.one ul {
+
+  padding: 1em 0;
+  background: white;
+
+}
+.one a {
+  padding: 1em;
+  background: #666666;
+  border-right: 1px solid #666666;
+  color: black;
+}
+.one a:hover {background: #CCCCCC;}
+.one li {
+  display: inline;
+}
+
+</style>
+<style>
+.container2{
+    position: relative;
+    top: 62px;
+    color: white;
+    text-align: center;
+
+
+}
+</style>
+<div class="container2">
+<div class="line1"><hr align="center" width="63.7%" size="2" color="black" /></div>
+</div>
+ <style>
+.container3{
+    position: relative;
+    top: 54px;
+    text-align: center;
+    background-color: white;
+    height: 70px;
+
+    margin-left: 18.11%;
+    margin-right: 18.11%;
+}
+{% block style_filtring%}{% endblock %}
+.refresh{
+   position: absolute;
+  top: 31.5px;
+  right: 134px;
+  text-align: center;
+}
+
+.buttonload {
+    position: absolute;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  padding: 4px 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 50%;
+  top: 18px;
+  left: 610px;
+
+}
+a-refresh{
+   display: block;
+  margin-left: auto;
+   margin-right: auto;
+
+}
+
+</style>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="container3">
+    {% block calendar %}
+    {% endblock %}
+
+
+</div>
+{% block else %}{% endblock %}
+</body>
+</html>
