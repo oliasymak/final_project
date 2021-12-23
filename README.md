@@ -23,9 +23,7 @@ Configure PostgreSQL database
 
 DATABASE_URL=postgres://<your_username>:<your_password>@<your_database_url>/<your_database_name>
 
-Run migrations to create database infrastructure:
 
-python -m flask db upgrade
 
 (Optional) Populate the database with sample data
 
