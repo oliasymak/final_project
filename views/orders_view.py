@@ -115,8 +115,6 @@ def orders_list_edit():
         return render_template("prototype_data_not_correct.html")
     if len(ccar_number) > 8:
         return render_template("prototype_data_not_correct.html")
-    if not rrental_time.isdigit():
-        return render_template("prototype_data_not_correct.html")
     if ppassport_number.isdigit() or ccar_number.isdigit():
         return render_template("prototype_data_not_correct.html")
     if ClientsList.query.get(ppassport_number) == None:
