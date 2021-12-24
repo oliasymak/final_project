@@ -24,10 +24,11 @@ def order_add(ccar_number, cpassport_number, rental_time, add_date):
     add_date (string): data from the field add date
     :return: None
     '''
+    add_date1 = datetime.strptime(add_date, "%Y-%m-%d")
     count_rows = db.session.query(OrdersList).count()
     car = CarsList.query.filter_by(car_number=ccar_number).first()
     client = ClientsList.query.filter_by(passport_number=cpassport_number).first()
-    order = OrdersList(count_rows + 1, client, int(rental_time), add_date, car)
+    order = OrdersList(count_rows + 1, client, int(rental_time), add_date1, car)
     db.session.add(order)
     db.session.commit()
     OrdersList.query.filter_by(car_number=None).update(dict(car_number=ccar_number))
@@ -56,6 +57,7 @@ def order_edit(ppassport_number, ccar_number, rrental_time, aadd_date, select_or
     select_order (string): data from the field selected order
     :return: None
     '''
+    add_date1 = datetime.strptime(aadd_date, "%Y-%m-%d")
     select_order_client = OrdersList.query.filter_by(id=select_order)
     select_client_passport = select_order_client[0].client_passport_number
     client = ClientsList.query.filter_by(passport_number=select_client_passport)
@@ -74,7 +76,7 @@ def order_edit(ppassport_number, ccar_number, rrental_time, aadd_date, select_or
 
     OrdersList.query.filter_by(id=select_order).update(
         dict(car_number=ccar_number, client_passport_number=ppassport_number, rental_time=int(rrental_time),
-             add_date=aadd_date))
+             add_date=add_date1))
 
     client1 = ClientsList.query.filter_by(passport_number=ppassport_number)
     number_orders1 = client1[0].number_of_orders_clients
