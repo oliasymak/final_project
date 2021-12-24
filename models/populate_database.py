@@ -56,5 +56,4 @@ def fill_database():
 
     db.session.commit()
 
-if __name__ == '__main__':
-    fill_database()
+
