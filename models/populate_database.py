@@ -56,4 +56,4 @@ def fill_database():
 
     db.session.commit()
 
-
+fill_database()
