@@ -170,3 +170,69 @@ def car_delete():
     rows = cars_table()
     return render_template("prototype_cars_list_general.html", rows=rows)
 
+
+@app.route('/car_statistic', methods=["GET", "POST"])
+def car_statistic():
+    if request.method == "GET":
+        return render_template("car_statistic.html")
+    return redirect(url_for('car_statistic'))
+
+
+@app.route('/cars_statistic_description', methods=["GET", "POST"])
+def cars_statistic_description():
+    '''
+    The function returns a page with diagram
+    :return:
+    '''
+    stat_car_description()
+    if request.method == "GET":
+        return render_template("stat_car_description.html")
+
+@app.route('/cars_statistic_number', methods=["GET", "POST"])
+def cars_statistic_number():
+    '''
+    The function returns a page with diagram
+    :return:
+    '''
+    stat_car_number()
+    if request.method == "GET":
+        return render_template("stat_car_number.html")
+
+@app.route('/cars_statistic_cost', methods=["GET", "POST"])
+def cars_statistic_cost():
+    '''
+    The function returns a page with diagram
+    :return:
+    '''
+    stat_car_cost()
+    if request.method == "GET":
+        return render_template("stat_car_cost.html")
+
+@app.route('/search_car_by_car_desc', methods=["GET", "POST"])
+def search_car_by_car_desc():
+    '''
+    The function search elements
+    :return:
+    '''
+    if request.method == "POST":
+        car_dec = request.form.get('car_dec').strip()
+    if car_dec.isdigit():
+        return render_template("prototype_data_not_correct.html")
+    rows = db.session.query(CarsList).filter_by(car_description=car_dec)
+    return render_template("prototype_cars_list_general.html", rows=rows)
+
+@app.route('/search_car_by_car_number', methods=["GET", "POST"])
+def search_car_by_car_number():
+    '''
+    The function search elements
+    :return:
+    '''
+    if request.method == "POST":
+        car_num10 = request.form.get('car_num10').strip()
+    if car_num10.isdigit():
+        return render_template("prototype_data_not_correct.html")
+    if len(car_num10)!=8:
+        return render_template("prototype_data_not_correct.html")
+    rows = db.session.query(CarsList).filter_by(car_number=car_num10)
+    return render_template("prototype_cars_list_general.html", rows=rows)
+

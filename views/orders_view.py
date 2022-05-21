@@ -115,6 +115,8 @@ def orders_list_edit():
         return render_template("prototype_data_not_correct.html")
     if len(ccar_number) > 8:
         return render_template("prototype_data_not_correct.html")
+    if not rrental_time.isdigit():
+        return render_template("prototype_data_not_correct.html")
     if ppassport_number.isdigit() or ccar_number.isdigit():
         return render_template("prototype_data_not_correct.html")
     if ClientsList.query.get(ppassport_number) == None:
@@ -181,3 +183,90 @@ def order_delete():
     rows = orders_table()
 
     return render_template("prototype_orders_list_general.html", rows=rows)
+
+@app.route('/order_statistic', methods=["GET", "POST"])
+def order_statistic():
+    '''
+    The function returns the statistic of order table
+    :return: prototype_add_order.html
+    '''
+    if request.method == "GET":
+        return render_template("order_statistic.html")
+    return redirect(url_for('order_statistic'))
+
+@app.route('/orders_statistic_car', methods=["GET", "POST"])
+def orders_statistic_car():
+    '''
+    The function returns a page with diagram
+    :return:
+    '''
+    stat_order_car()
+    if request.method == "GET":
+        return render_template("stat_order_car.html")
+
+@app.route('/orders_statistic_client', methods=["GET", "POST"])
+def orders_statistic_client():
+    '''
+    The function returns a page with diagram
+    :return:
+    '''
+    stat_order_client()
+    if request.method == "GET":
+        return render_template("stat_order_client.html")
+
+@app.route('/orders_statistic_date', methods=["GET", "POST"])
+def orders_statistic_date():
+    '''
+    The function returns a page with diagram
+    :return:
+    '''
+    stat_order_date()
+    if request.method == "GET":
+        return render_template("stat_order_date.html")
+
+@app.route('/search_order_by_id', methods=["GET", "POST"])
+def search_order_by_id():
+    '''
+    The function search elements
+    :return:
+    '''
+    if request.method == "POST":
+        id_number = request.form.get('ord_id').strip()
+    if not id_number.isdigit():
+        return render_template("prototype_data_not_correct.html")
+    rows = db.session.query(OrdersList).filter_by(id=int(id_number))
+    return render_template("prototype_orders_list_general.html", rows=rows)
+
+@app.route('/search_order_by_car_number', methods=["GET", "POST"])
+def search_order_by_car_number():
+    '''
+    The function search elements
+    :return:
+    '''
+    if request.method == "POST":
+        car_num = request.form.get('ord_cnum').strip()
+    if car_num.isdigit():
+        return render_template("prototype_data_not_correct.html")
+    if len(car_num) != 8:
+        return render_template("prototype_data_not_correct.html")
+    rows = db.session.query(OrdersList).filter_by(car_number=car_num)
+    return render_template("prototype_orders_list_general.html", rows=rows)
+
+@app.route('/search_order_by_passport_number', methods=["GET", "POST"])
+def search_order_by_passport_number():
+    '''
+    The function search elements
+    :return:
+    '''
+    if request.method == "POST":
+        ord_pasnum = request.form.get('ord_pasnum').strip()
+    if ord_pasnum.isdigit():
+        return render_template("prototype_data_not_correct.html")
+    if len(ord_pasnum) > 6:
+        return render_template("prototype_data_not_correct.html")
+    rows = db.session.query(OrdersList).filter_by(client_passport_number=ord_pasnum)
+    return render_template("prototype_orders_list_general.html", rows=rows)
+
+
+
+

@@ -165,5 +165,61 @@ def client_delete():
     return render_template("prototype_clients_list_general.html", rows=rows)
 
 
+@app.route('/client_statistic', methods=["GET", "POST"])
+def client_statistic():
+    if request.method == "GET":
+        return render_template("client_statistic.html")
+    return redirect(url_for('client_statistic'))
+
+
+@app.route('/clients_statistic_passport', methods=["GET", "POST"])
+def clients_statistic_passport():
+    '''
+    The function returns a page with diagram
+    :return:
+    '''
+    stat_client_passport()
+    if request.method == "GET":
+        return render_template("stat_client_passport.html")
+
+
+@app.route('/clients_statistic_date', methods=["GET", "POST"])
+def clients_statistic_date():
+    '''
+    The function returns a page with diagram
+    :return:
+    '''
+    stat_client_date()
+    if request.method == "GET":
+        return render_template("stat_client_date.html")
+
+@app.route('/search_client_by_name', methods=["GET", "POST"])
+def search_client_by_name():
+    '''
+    The function search elements
+    :return:
+    '''
+    if request.method == "POST":
+        clnt_name = request.form.get('clnt_name').strip()
+
+    names = clnt_name.split(" ")
+    print(names)
+    if clnt_name.isdigit():
+        return render_template("prototype_data_not_correct.html")
+    rows = db.session.query(ClientsList).filter_by(first_name=names[0], last_name = names[1])
+    return render_template("prototype_clients_list_general.html", rows=rows)
+
+@app.route('/search_client_by_passport_number', methods=["GET", "POST"])
+def search_client_by_passport_number():
+    if request.method == "POST":
+        clnt_pasnum = request.form.get('clnt_pasnum').strip()
+    if clnt_pasnum.isdigit():
+        return render_template("prototype_data_not_correct.html")
+    if len(clnt_pasnum) > 6:
+        return render_template("prototype_data_not_correct.html")
+    rows = db.session.query(ClientsList).filter_by(passport_number=clnt_pasnum)
+    return render_template("prototype_clients_list_general.html", rows=rows)
+
+
 
 
