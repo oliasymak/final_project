@@ -1,5 +1,5 @@
 from app import db
-
+import datetime
 class ClientsList(db.Model):
     __table__name = 'clients_list'
 

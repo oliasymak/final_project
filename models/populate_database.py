@@ -2,7 +2,9 @@ from app import db
 from models.clients import ClientsList
 from models.cars import CarsList
 from models.orders import OrdersList
-from datetime import date
+from datetime import date, timedelta
+import random
+
 
 def fill_database():
     '''
@@ -16,44 +18,58 @@ def fill_database():
     '''
     db.drop_all()
     db.create_all()
-    client1 = ClientsList('Ірина', 'Дмитрасевич', 'ab2413', date(2021, 11, 22), 2)
-    client2 = ClientsList('Дмитро', 'Гнатенко', 'ac4123', date(2021, 10, 20), 1)
-    client3 = ClientsList('Ігор', 'Петриляк', 'ac5678', date(2021, 11, 15), 1)
-    client4 = ClientsList('Ольга', 'Юрків', 'af3553', date(2021, 9, 8), 1)
-    client5 = ClientsList('Назар', 'Сохан', 'ab3421', date(2021, 10, 30), 1)
+    first_names_list = ['Ірина', 'Дмитро', 'Ігор', 'Ольга', 'Назар', 'Анастасія', 'Давид', 'Олег',
+                        'Соломія', 'Андрій', 'Надія', 'Наталія', 'Федір', 'Григорій', 'Петро']
+    last_names_list = ['Дмитрасевич', 'Гнатенко', 'Петриляк', 'Юрків', 'Сохан', 'Юськів', 'Соколівський',
+                       'Янів', 'Янківська', 'Ковалишин', 'Фендак', 'Гончаренко', 'Степаненко', 'Сидоренко',
+                       'Гнатюк', ]
+    passport_numbers_list = ['ab2413', 'ac4123', 'ac5678', 'af3553', 'ab3421', 'ab2715',
+                             'ab1314', 'ac1314', 'ac9876', 'ab9876', 'af5467', 'ak8976',
+                             'ak1234', 'ac7777', 'ab0909', ]
 
-    car1 = CarsList('bmw', 'ВС3457НО', 85, 1)
-    car2 = CarsList('Audi', 'ВС8742ОВ', 80, 1)
-    car3 = CarsList('Renault', 'ВС8771КК', 70, 1)
-    car4 = CarsList('Opel', 'ВС8734АА', 60, 1)
-    car5 = CarsList('Mercedes', 'ВС9812ММ', 75, 2)
+    test_date1, test_date2 = date(2021, 2, 5), date(2021, 10, 1)
+    K = 15
+    dates = [test_date1]
+    while test_date1 != test_date2:
+        test_date1 += timedelta(days=1)
+        dates.append(test_date1)
+    dates_list = random.choices(dates, k=K)
+    clients = []
+    for i in range(len(passport_numbers_list)):
+        clients.append(ClientsList(first_names_list[i], last_names_list[i], passport_numbers_list[i], dates_list[i], 0))
 
-    order1 = OrdersList(1, client1, 2, date(2021, 11, 22), car2)
-    order2 = OrdersList(2, client3, 1, date(2021, 11, 15), car3)
-    order3 = OrdersList(3, client5, 3, date(2021, 10, 30), car1)
-    order4 = OrdersList(4, client4, 2, date(2021, 9, 8), car4)
-    order5 = OrdersList(5, client2, 1, date(2021, 10, 20), car5)
-    order6 = OrdersList(6, client1, 3, date(2021, 12, 1), car5)
+    car_description_list = ['bmw', 'Audi', 'Renault', 'Opel', 'Mercedes', 'Ford', 'Volkswagen', 'Renault',
+                            'Chevrolet', 'Mazda', 'Lexus', 'Peugeot', 'Toyota', 'Skoda', 'Suzuki', 'SEAT',
+                            'Porche', 'Citroen', 'Mitsubishi', 'Dacia']
+    car_numbers_list = ['ВС3457НО', 'ВС8742ОВ', 'ВС8771КК', 'ВС8734АА', 'ВС9812ММ', 'ВС6574РР', 'ВС7383КА',
+                        'ВС1265КО', 'ВС9778ММ', 'ВС9270ММ', 'ВС5673ЛК', 'ВС7462ОО', 'ВС2743ЛК', 'ВС4526МС',
+                        'ВС1234МС', 'ВС4983КК', 'ВС4447МС', 'ВС1252МК', 'ВС4988КО', 'ВС7772АР']
+    price_list = [85, 80, 70, 60, 75, 100, 110, 65, 110, 115, 130, 80, 90, 75, 95, 75, 150, 70, 85, 60]
+    cars_list = []
+    for i in range(len(car_numbers_list)):
+        cars_list.append(CarsList(car_description_list[i], car_numbers_list[i], price_list[i], 0))
 
-    db.session.add(client1)
-    db.session.add(client2)
-    db.session.add(client3)
-    db.session.add(client4)
-    db.session.add(client5)
 
-    db.session.add(car1)
-    db.session.add(car2)
-    db.session.add(car3)
-    db.session.add(car4)
-    db.session.add(car5)
-
-    db.session.add(order1)
-    db.session.add(order2)
-    db.session.add(order3)
-    db.session.add(order4)
-    db.session.add(order5)
-    db.session.add(order6)
-
+    orders = []
+    for i in range(100):
+        orders.append(OrdersList(i + 1, random.choice(clients), random.randint(1, 10), random.choice(dates_list),
+                                 random.choice(cars_list)))
+    for i in orders:
+        db.session.add(i)
+    number_of_orders_list = []
+    for i in car_numbers_list:
+        number_of_orders_list.append(OrdersList.query.filter_by(car_number=i).count())
+    number_of_orders_list1 = []
+    for i in passport_numbers_list:
+        number_of_orders_list1.append(OrdersList.query.filter_by(client_passport_number=i).count())
+    print(number_of_orders_list1)
+    for i in range(len(car_numbers_list)):
+        CarsList.query.filter_by(car_number=car_numbers_list[i]).update(
+            dict(number_of_orders_cars=number_of_orders_list[i]))
+    for i in range(len(passport_numbers_list)):
+        ClientsList.query.filter_by(passport_number=passport_numbers_list[i]).update(
+            dict(number_of_orders_clients=number_of_orders_list1[i]))
     db.session.commit()
+
 
 fill_database()
