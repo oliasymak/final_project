@@ -1,6 +1,7 @@
 from app import db
 from models.cars import CarsList
 from models.orders import OrdersList
+import plotly.graph_objects as go
 
 
 def cars_table():
@@ -56,3 +57,63 @@ def car_delete_f(ccar_number):
     OrdersList.query.filter(OrdersList.car_number == ccar_number).delete()
     CarsList.query.filter(CarsList.car_number == ccar_number).delete()
     db.session.commit()
+
+
+def stat_car_description():
+    number_of_orders = []
+    car_description = []
+    rows = CarsList.query.order_by(CarsList.number_of_orders_cars).all()
+    for i in rows:
+        number_of_orders.append(int(i.number_of_orders_cars))
+        car_description.append(i.car_description)
+    fig = go.Figure(
+        data=[go.Bar(x=car_description,y=number_of_orders)],
+        layout_title_text="Order statistic by car description"
+    )
+    fig.update_layout(
+        hovermode="closest",
+        plot_bgcolor='#54595C',
+        paper_bgcolor='#54595C',
+        font=dict(color='white'))
+    fig.update_traces(marker_color='#69A84F')
+    fig.write_html("D:\Курсова\\templates/stat_car_description.html")
+
+
+def stat_car_number():
+    number_of_orders = []
+    car_numbers = []
+    rows = CarsList.query.order_by(CarsList.number_of_orders_cars).all()
+    for i in rows:
+        number_of_orders.append(int(i.number_of_orders_cars))
+        car_numbers.append(i.car_number)
+    fig = go.Figure(
+        data=[go.Bar(x=car_numbers,y=number_of_orders)],
+        layout_title_text="Order statistic by car number"
+    )
+    fig.update_layout(
+        hovermode="closest",
+        plot_bgcolor='#54595C',
+        paper_bgcolor='#54595C',
+        font=dict(color='white'))
+    fig.update_traces(marker_color='#69A84F')
+    fig.write_html("D:\Курсова\\templates/stat_car_number.html")
+
+def stat_car_cost():
+    number_of_orders = []
+    car_cost = []
+    rows = CarsList.query.order_by(CarsList.rental_cost).all()
+    for i in rows:
+        number_of_orders.append(int(i.number_of_orders_cars))
+        car_cost.append(str(i.rental_cost))
+
+    fig = go.Figure(
+        data=[go.Bar(x=car_cost,y=number_of_orders)],
+        layout_title_text="Order statistic by rental cost"
+    )
+    fig.update_layout(
+        hovermode="closest",
+        plot_bgcolor='#54595C',
+        paper_bgcolor='#54595C',
+        font=dict(color='white'))
+    fig.update_traces(marker_color='#69A84F')
+    fig.write_html("D:\Курсова\\templates/stat_car_cost.html")

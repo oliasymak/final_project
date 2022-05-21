@@ -1,10 +1,9 @@
 from app import db
-from datetime import date
-from datetime import datetime
 from models.cars import CarsList
 from models.orders import OrdersList
 from models.clients import ClientsList
-
+from datetime import datetime
+import plotly.graph_objects as go
 
 def orders_table():
     '''
@@ -118,3 +117,63 @@ def order_delete_f(order_id):
         dict(number_of_orders_clients=number_orders))
     OrdersList.query.filter(OrdersList.id == int(order_id)).delete()
     db.session.commit()
+
+def stat_order_car():
+    number_of_orders = []
+    car_numbers = []
+    rows = CarsList.query.order_by(CarsList.number_of_orders_cars).all()
+    for i in rows:
+        number_of_orders.append(int(i.number_of_orders_cars))
+        car_numbers.append(i.car_number)
+    fig = go.Figure(
+        data=[go.Bar(x=car_numbers,y=number_of_orders)],
+        layout_title_text="Order statistic by car number"
+    )
+    fig.update_layout(
+        hovermode="closest",
+        plot_bgcolor='#54595C',
+        paper_bgcolor='#54595C',
+        font=dict(color='white'))
+    fig.update_traces(marker_color='#69A84F')
+    fig.write_html("D:\Курсова\\templates/stat_order_car.html")
+
+
+def stat_order_client():
+    number_of_orders = []
+    passport_numbers = []
+    rows = ClientsList.query.order_by(ClientsList.number_of_orders_clients).all()
+    for i in rows:
+        number_of_orders.append(int(i.number_of_orders_clients))
+        passport_numbers.append(i.passport_number)
+    fig = go.Figure(
+        data=[go.Bar(x=passport_numbers,y=number_of_orders)],
+        layout_title_text="Order statistic by passport number"
+    )
+    fig.update_layout(
+        hovermode="closest",
+        plot_bgcolor='#54595C',
+        paper_bgcolor='#54595C',
+        font=dict(color='white'))
+    fig.update_traces(marker_color='#69A84F')
+    fig.write_html("D:\Курсова\\templates/stat_order_client.html")
+
+def stat_order_date():
+    number_of_orders = []
+    add_date = []
+    rows = OrdersList.query.order_by(OrdersList.add_date).all()
+    for i in rows:
+        add_date.append(str(i.add_date))
+    my_dict = {i: add_date.count(i) for i in add_date}
+    number_of_orders = list(my_dict.values())
+    print(add_date)
+    fig = go.Figure(
+        data=[go.Bar(x=add_date,y=number_of_orders)],
+        layout_title_text="Order statistic by date"
+    )
+    fig.update_layout(
+        hovermode="closest",
+        plot_bgcolor='#54595C',
+        paper_bgcolor='#54595C',
+        font=dict(color='white'))
+    fig.update_traces(marker_color='#69A84F')
+    fig.write_html("D:\Курсова\\templates/stat_order_date.html")

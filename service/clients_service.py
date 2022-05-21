@@ -3,7 +3,8 @@ from datetime import date
 from datetime import datetime
 from models.orders import OrdersList
 from models.clients import ClientsList
-
+from datetime import datetime
+import plotly.graph_objects as go
 
 def clients_table():
     '''
@@ -66,3 +67,45 @@ def client_delete_f(ppassport_number):
     OrdersList.query.filter(OrdersList.client_passport_number == ppassport_number).delete()
     ClientsList.query.filter(ClientsList.passport_number == ppassport_number).delete()
     db.session.commit()
+
+
+def stat_client_passport():
+    number_of_orders = []
+    passport_numbers = []
+    rows = ClientsList.query.order_by(ClientsList.number_of_orders_clients).all()
+    for i in rows:
+        number_of_orders.append(int(i.number_of_orders_clients))
+        passport_numbers.append(i.passport_number)
+    fig = go.Figure(
+        data=[go.Bar(x=passport_numbers, y=number_of_orders)],
+        layout_title_text="Order statistic by passport number"
+    )
+    fig.update_layout(
+        hovermode="closest",
+        plot_bgcolor='#54595C',
+        paper_bgcolor='#54595C',
+        font=dict(color='white'))
+    fig.update_traces(marker_color='#69A84F')
+    fig.write_html("D:\Курсова\\templates/stat_client_passport.html")
+
+
+def stat_client_date():
+    number_of_orders = []
+    add_dates = []
+    rows = ClientsList.query.order_by(ClientsList.number_of_orders_clients).all()
+    for i in rows:
+        number_of_orders.append(int(i.number_of_orders_clients))
+        add_dates.append(i.add_date)
+    fig = go.Figure(
+        data=[go.Bar(x=add_dates,y=number_of_orders)],
+        layout_title_text="Order statistic by add date"
+    )
+    fig.update_layout(
+        hovermode="closest",
+        plot_bgcolor='#54595C',
+        paper_bgcolor='#54595C',
+        font=dict(color='white'))
+    fig.update_traces(marker_color='#69A84F')
+    fig.write_html("D:\Курсова\\templates/stat_client_date.html")
+
+
