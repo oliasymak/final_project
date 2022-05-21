@@ -4,7 +4,7 @@
 Cars list
 {% endblock %}
 {% block lin_style%}
-355px;
+355.5px;
 {% endblock %}
 
 {% block style_filtring %}
@@ -36,6 +36,26 @@ Cars list
   border: none;
   color: white;
   padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.stat{
+   position: absolute;
+  top: 20px;
+  left: 700px;
+}
+
+.button2 {
+  background-color: #69A84F;
+  border: none;
+  color: white;
+  padding: 10px 25px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -103,33 +123,24 @@ input{
      </p>
      </form></div>
     <div class="add"><form  action="/add_car" method="get"><button class="button1">add</button></form></div>
+    <div class="stat"><form  action="/car_statistic" method="get"><button class="button2">statistic</button></form></div>
 {% endblock %}
 
 
 
 {% block else %}
-<style>
-.container4{
-    position: relative;
-    top: 46px;
-    text-align: center;
-    color: white;
 
-    
-
-}
-</style>
-<div class="container4">
-<div class="line1"><hr align="center" width="63.7%" size="2" color="black" /></div>
-</div>
 <style>
 .container5{
     position: relative;
-    top: 38px;
-
+    top: 68px;
+    text-align: center;
     background-color: white;
-    margin-left: 18.05%;
-    margin-right: 18.05%;
+    border: 2px solid black;
+    width: 797.5px;
+    margin: 0;
+    padding: 10px;
+    left:230
 }
 .table1 {
   border-collapse: collapse; 
@@ -147,8 +158,8 @@ input{
   position: absolute;
   border-collapse: collapse; 
   line-height: 1.1; 
-  right:10px;
-  top: 35.5px;
+  left: 710px;
+  top: 70px;
   color: #0C213B;
 }
 table, th, td {
@@ -168,9 +179,63 @@ dialog {
     top: -70px;
     right: 570px;
 }
+.buttonsearch1 {
+  position: absolute;
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 2px 0px;
+  top: 0px;
+  right: 250px;
 
+}
+.buttonsearch2 {
+  position: absolute;
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 2px 0px;
+  top: 16px;
+  right: -35px;
+
+}
+
+.search_container_car_desc{
+    position: relative;
+    top: 0px;
+    text-align: center;
+    margin: 0;
+    right: 270px;
+}
+.text_search_car_numberr{
+    position: absolute;
+    top: -17px;
+    text-align: center;
+    margin: 0;
+    right: 0px;
+}
 </style>
 <div class="container5">
+    <div class="search_container_car_desc">
+        <div class="text_search_car_desc">
+       <form action = "/search_car_by_car_desc" method="post">
+       <p><label for="car_dec">By car description:</label>
+       <textarea id="car_dec" name="car_dec" rows="1" cols="8"></textarea></p>
+       <p>
+        <button class="buttonsearch1">
+             <i class="fa fa-search fa-fw"></i></button>
+        </p>
+        </form></div>
+        <div class="text_search_car_numberr">
+       <form action = "/search_car_by_car_number" method="post">
+       <p><label for="car_num10">By car number:</label>
+       <textarea id="car_num10" name="car_num10" rows="1" cols="8"></textarea></p>
+       <p>
+        <button class="buttonsearch2">
+             <i class="fa fa-search fa-fw"></i></button>
+        </p>
+        </form></div>
+    </div>
 <div class = "table1"><table  width="87%" cellpadding="3">
   <tr>
     <th class="col1">Car description</th>
@@ -221,6 +286,7 @@ dialog {
     </script>
 
 </table>
+
 </div>
 </div>
 {% endblock %}

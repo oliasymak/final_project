@@ -4,7 +4,7 @@
 Orders list
 {% endblock %}
 {% block lin_style%}
-41.5%;
+340.5px;
 {% endblock %}
 
 {% block style_filtring %}
@@ -31,7 +31,12 @@ Orders list
 .add{
    position: absolute;
   top: 20px;
-  left: 560px; 
+  left: 560px;
+}
+.stat{
+   position: absolute;
+  top: 20px;
+  left: 700px;
 }
 
 .button1 {
@@ -39,6 +44,20 @@ Orders list
   border: none;
   color: white;
   padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.button2 {
+  background-color: #69A84F;
+  border: none;
+  color: white;
+  padding: 10px 25px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -96,36 +115,29 @@ Orders list
      </p>
      </form></div>
     <div class="add"><form  action="/add_order" method="get"><button class="button1">add</button></form></div>
+    <div class="stat"><form  action="/order_statistic" method="get"><button class="button2">statistic</button></form></div>
     {% endblock %}
 
 
 {% block else %}
-<style>
-.container4{
-    position: relative;
-    top: 46px;
-    text-align: center;
-    color: white;
-    
 
-}
-</style>
-<div class="container4">
-<div class="line1"><hr align="center" width="63.7%" size="2" color="black" /></div>
-</div>
 <style>
 .container5{
     position: relative;
-    top: 38px;
-
+    top: 67px;
+    text-align: center;
     background-color: white;
-    margin-left: 18.05%;
-    margin-right: 18.05%;
+    border: 2px solid black;
+    width: 797.5px;
+    margin: 0;
+    padding: 10px;
+    left:230
 }
 .table1 {
+
   border-collapse: collapse; 
   line-height: 1.1; 
-  
+
   color: #0C213B;
 }
 .col1{
@@ -138,8 +150,8 @@ Orders list
   position: absolute;
   border-collapse: collapse; 
   line-height: 1.1; 
-  right:10px;
-  top: 35.5px;
+  left: 710px;
+  top: 70px;
   color: #0C213B;
 }
 table, th, td {
@@ -159,8 +171,93 @@ dialog {
     top: -20px;
     right: 570px;
 }
+.text_search_id{
+    position: absolute;
+    top: -35px;
+    text-align: center;
+    margin: 0;
+    left: 910px;
+}
+.search_container_car_number{
+    position: relative;
+    top: 0px;
+    text-align: center;
+    margin: 0;
+    right: 300px;
+}
+.text_search_passport_number{
+    position: absolute;
+    top: -18px;
+    text-align: center;
+    margin: 0;
+    right: 30px;
+}
+
+.buttonsearch {
+  position: absolute;
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 2px 0px;
+  top: 33px;
+  left: 85px;
+
+}
+.buttonsearch1 {
+  position: absolute;
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 2px 0px;
+  top: 0px;
+  right: 270px;
+
+}
+.buttonsearch2 {
+  position: absolute;
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 2px 0px;
+  top: 17px;
+  left: 225px;
+
+}
+
+
 </style>
 <div class="container5">
+    <div class="search_container_car_number">
+        <div class="text_search_car_number">
+       <form action = "/search_order_by_car_number" method="post">
+       <p><label for="ord_cnum">By car number:</label>
+       <textarea id="ord_cnum" name="ord_cnum" rows="1" cols="8"></textarea></p>
+       <p>
+        <button class="buttonsearch1">
+             <i class="fa fa-search fa-fw"></i></button>
+        </p>
+        </form></div>
+        <div class="text_search_passport_number">
+       <form action = "/search_order_by_passport_number" method="post">
+       <p><label for="ord_pasnum">By passport number:</label>
+       <textarea id="ord_pasnum" name="ord_pasnum" rows="1" cols="8"></textarea></p>
+       <p>
+        <button class="buttonsearch2">
+             <i class="fa fa-search fa-fw"></i></button>
+        </p>
+        </form></div>
+        <div class="text_search_id">
+       <form action = "/search_order_by_id" method="post">
+       <p><label for="ord_id" >By ID:</label>
+       <textarea id="ord_id" name="ord_id" rows="1" cols="8"></textarea></p>
+       <p>
+        <button class="buttonsearch">
+             <i class="fa fa-search fa-fw"></i></button>
+        </p>
+        </form></div>
+    </div>
+
+
 <div class = "table1"><table  width="87%" cellpadding="3">
   <tr>
       <th class="col1">ID</th>
@@ -185,7 +282,8 @@ dialog {
 
 </table>
 </div>
-<div class = "table2"><table  width="10%" cellpadding="4">
+<div class="table2">
+    <table  width="10%" cellpadding="4">
 
   <tr>
     <td> <a method="get" href="/edit_order"><i class="fa fa-pencil fa-fw"></i></a></td>
@@ -213,10 +311,10 @@ dialog {
      }
 
     </script>
-
-
-  
 </table>
+
+
+    </div>
 </div>
-</div>
+
 {% endblock %}

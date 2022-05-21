@@ -7,31 +7,34 @@
 <style>
 .container {
     position: relative;
-    top: 101px;
+    top: 100px;
     text-align: center;
-    margin-left: 25%;
-    margin-right: 25%;
-    background-color: #999999;
+    color: white;
 }
 
 </style>
 <div class="container">
-  <div class="lin"><p><b>{% block title_add %}{% endblock %}</b></p></div>
+  <div class="lin"><h1 class="orders_list"><span>{% block title_add %}{% endblock %}</span></h1></div>
 </div>
 <style>
-.lin {
+.orders_list {
 	font-size: 30px;
 	line-height: 50px;
 	color: white;
 
+}
+.orders_list span {
+	padding: 0 {% block lin_style %}{% endblock%}
+	background: #999999;
 }
 </style>
 <style>
 .container1{
     position: relative;
     top: 71px;
-    margin-left: 25%;
-    margin-right: 25%;
+    text-align: center;
+    color: white;
+    left: 304.5px;
 
 }
 
@@ -70,7 +73,8 @@ i {
 nav {
   text-align: left;
   display: block;
-
+  width: 670.5px;
+  margin: 0 auto 30x;
 
 }
 .one ul {
@@ -102,17 +106,20 @@ nav {
 }
 </style>
 <div class="container2">
-<div class="line1"><hr align="center" width="50%" size="2" color="black" /></div>
+<div class="line1"><hr align="center" width="52.29%" size="2" color="black" /></div>
 </div>
 </div>
 <style>
 .container3{
     position: relative;
-    top: 46px;
-    height: 250px;
+    top: 54px;
+    text-align: center;
     background-color: white;
-    margin-left: 25%;
-    margin-right: 25%;
+    width: 650.5px;
+    height: 250px;
+    margin: 0;
+    padding: 10px;
+    left:304.8
 }
 .text1{
     position: absolute;

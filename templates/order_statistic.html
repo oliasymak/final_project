@@ -14,7 +14,7 @@
 
 </style>
 <div class="container">
-  <div class="lin"><h1 class="orders_list"><span>{% block title%}{%endblock%}</span></h1></div>
+  <div class="lin"><h1 class="orders_list"><span>Order statistic</span></h1></div>
 </div>
 <style>
 .orders_list {
@@ -24,8 +24,7 @@
 
 }
 .orders_list span {
-    {%block padding%}{% endblock%}
-
+	padding: 0 243px;
 	background: #999999;
 }
 </style>
@@ -114,21 +113,23 @@ nav {
 .container3{
     position: relative;
     top: 54px;
-    text-align: left;
+    text-align: center;
     background-color: white;
     width: 650.5px;
-    height: 300px;
+    height: 250px;
     margin: 0;
     padding: 10px;
     left:304.8
 }
 .text1{
     position: absolute;
-    top: 10px;
+    top: 7px;
     left: 40px;
     font-size: 17pt;
 }
-input[type=submit].submit_save{
+
+
+.button1{
   position: absolute;
   background-color: #69A84F;
   border: none;
@@ -141,15 +142,16 @@ input[type=submit].submit_save{
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 4px;
-  left: 410px;
-  top: 80px;
+  left: 190px;
+  top: 20px;
 }
-.button2 {
+
+ .button2{
   position: absolute;
-  background-color: white;
-  border: 2px solid black;
-  color: black;
-  padding: 15px 32px;
+  background-color: #69A84F;
+  border: none;
+  color: white;
+  padding: 15px 40px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -157,19 +159,41 @@ input[type=submit].submit_save{
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 4px;
-  left: 450px;
+  left: 190px;
+  top: 80px;
+}
+
+.button3{
+  position: absolute;
+  background-color: #69A84F;
+  border: none;
+  color: white;
+  padding: 15px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  left: 190px;
   top: 140px;
 }
 
-{%block text4%}{%endblock%}
-
-
-
 </style>
 <div class="container3">
-   {% block container3_text%}{% endblock%}
-<div class="cancel"><form  {% block action %}{% endblock %} method="get"><button class="button2">cancel</button></form></div>
-
+  <div class="statistic1">
+       <form action = "/orders_statistic_car" method="get">
+   <button class="button1">Statistic by car number</button>
+     </form></div>
+  <div class="statistic1">
+       <form action = "/orders_statistic_client" method="get">
+         <button class="button2">Statistic by client number</button>
+  </form></div>
+  <div class="statistic1">
+       <form action = "/orders_statistic_date" method="get">
+         <button class="button3">Statistic by add date</button>
+   </form></div>
 </div>
  </body>
 </html>
